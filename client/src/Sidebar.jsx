@@ -3,11 +3,6 @@ import {
   Button,
   Stack,
   Drawer,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  useMediaQuery,
   Typography,
   Box,
 } from "@mui/material";
@@ -16,6 +11,7 @@ import ImageIcon from "@mui/icons-material/Image";
 import NightsStayIcon from "@mui/icons-material/NightsStay";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import MenuIcon from "@mui/icons-material/Menu";
+import {SiOpenai} from 'react-icons/si';
 
 function Sidebar({
   setCurrentChatType,
@@ -39,8 +35,14 @@ function Sidebar({
         padding: "10px",
       }}
     >
-      <Box>
-        <Typography sx={{ color: "#fff", alignItems: 'center', padding: "20px 0px",  }}>NexusGPT</Typography>
+       <Box
+        sx={{
+          color: "#fff",
+          padding: "10px 0px",
+          alignContent: 'center'
+        }}
+      >
+         <Typography sx={{fontSize: 'x-large'}}><SiOpenai/> NexusGPT</Typography>
       </Box>
 
       <Button
@@ -48,6 +50,7 @@ function Sidebar({
           border: "1px solid #fff",
           color: "#fff",
           padding: "10px 0px",
+          margin: "20px 0px 0px 0px",
           background: currentChatType === "text" ? "rgba(52, 53, 65, 1)" : "",
           "&: hover": {
             border: "1px solid #fff",

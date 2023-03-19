@@ -13,6 +13,8 @@ import { Send } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import SmartToyIcon from "@mui/icons-material/SmartToy";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import {SiOpenai} from 'react-icons/si';
+import { color } from "@mui/system";
 
 function App() {
   const [inputValue, setInputValue] = useState("");
@@ -86,7 +88,6 @@ function App() {
 
   console.log(currentChatType);
 
-  const isSmallScreen = useMediaQuery("(max-width:1000px)");
   return (
     <Stack direction={"row"} height="100vh">
       <Box>
@@ -116,7 +117,7 @@ function App() {
           {messages && messages.length > 0
             ? messages.map((item) => (
                 <Box>
-                  <Box
+                  <Box className="queryBox"
                     sx={{
                       padding: "20px 120px",
                     }}
@@ -127,7 +128,7 @@ function App() {
                         color: isDarkMode ? "#fff" : "#000",
                       }}
                     />
-                    <Typography
+                    <Typography className="queryBoxTypo"
                       sx={{
                         color: isDarkMode ? "#fff" : "#000",
                         justifyContent: "center",
@@ -138,7 +139,7 @@ function App() {
                   </Box>
 
                   {item.result !== "" ? (
-                    <Box
+                    <Box className="resultBox"
                       sx={{
                         padding: "20px 120px",
                         backgroundColor: isDarkMode
@@ -147,12 +148,7 @@ function App() {
                         border: "1px solid rgba(0,0,0,0.1)",
                       }}
                     >
-                      <SmartToyIcon
-                        sx={{
-                          fontSize: "xxx-large",
-                          color: isDarkMode ? "#fff" : "#000",
-                        }}
-                      />
+                      <Typography sx={{color: isDarkMode ? "#fff" : "#000"}}><SiOpenai className="openAI"/></Typography>
                       {item.type === "text" ? (
                         <Typography
                           sx={{
