@@ -11,17 +11,18 @@ import {
 } from "@mui/material";
 import { Send } from "@mui/icons-material";
 import { useEffect, useState } from "react";
-import SmartToyIcon from "@mui/icons-material/SmartToy";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import {SiOpenai} from 'react-icons/si';
-import { color } from "@mui/system";
+import { SiOpenai } from "react-icons/si";
+import BoltIcon from "@mui/icons-material/Bolt";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 
 function App() {
   const [inputValue, setInputValue] = useState("");
   const [currentChatType, setCurrentChatType] = useState("text");
   const [messages, setMessages] = useState([]);
   const [currentResult, setCurrentResult] = useState("");
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true);
 
   function handleChatInput(event) {
     const { target } = event;
@@ -88,6 +89,8 @@ function App() {
 
   console.log(currentChatType);
 
+  const isNonDesktopScreens = useMediaQuery("(max-width: 800px)");
+
   return (
     <Stack direction={"row"} height="100vh">
       <Box>
@@ -114,64 +117,377 @@ function App() {
             overflow: "auto",
           }}
         >
-          {messages && messages.length > 0
-            ? messages.map((item) => (
-                <Box>
-                  <Box className="queryBox"
+          {/*Messages or queries */}
+          {messages && messages.length > 0 ? (
+            messages.map((item) => (
+              <Box>
+                <Box
+                  sx={{
+                    padding: isNonDesktopScreens ? "2px 50px" : "20px 120px",
+                  }}
+                >
+                  <AccountCircleIcon
                     sx={{
-                      padding: "20px 120px",
+                      fontSize: "xxx-large",
+                      color: isDarkMode ? "#fff" : "#000",
+                    }}
+                  />
+                  <Typography
+                    className="queryBoxTypo"
+                    sx={{
+                      color: isDarkMode ? "#fff" : "#000",
+                      justifyContent: "center",
                     }}
                   >
-                    <AccountCircleIcon
-                      sx={{
-                        fontSize: "xxx-large",
-                        color: isDarkMode ? "#fff" : "#000",
-                      }}
-                    />
-                    <Typography className="queryBoxTypo"
-                      sx={{
-                        color: isDarkMode ? "#fff" : "#000",
-                        justifyContent: "center",
-                      }}
-                    >
-                      {item.query}
-                    </Typography>
-                  </Box>
-
-                  {item.result !== "" ? (
-                    <Box className="resultBox"
-                      sx={{
-                        padding: "20px 120px",
-                        backgroundColor: isDarkMode
-                          ? "rgba(68, 70, 84, 1)"
-                          : "rgba(247, 247, 248, 1)",
-                        border: "1px solid rgba(0,0,0,0.1)",
-                      }}
-                    >
-                      <Typography sx={{color: isDarkMode ? "#fff" : "#000"}}><SiOpenai className="openAI"/></Typography>
-                      {item.type === "text" ? (
-                        <Typography
-                          sx={{
-                            color: isDarkMode ? "rgba(236, 236, 241, 1)" : "",
-                            textAlign: "justify",
-                          }}
-                        >
-                          {item.result}
-                        </Typography>
-                      ) : (
-                        <img
-                          style={{
-                            width: "200px",
-                          }}
-                          src={item.result}
-                          alt="Image"
-                        />
-                      )}
-                    </Box>
-                  ) : null}
+                    {item.query}
+                  </Typography>
                 </Box>
-              ))
-            : null}
+
+                {item.result !== "" ? (
+                  <Box
+                    className="resultBox"
+                    sx={{
+                      padding: isNonDesktopScreens ? "5px 50px" : "20px 120px",
+                      backgroundColor: isDarkMode
+                        ? "rgba(68, 70, 84, 1)"
+                        : "rgba(247, 247, 248, 1)",
+                      border: "1px solid rgba(0,0,0,0.1)",
+                    }}
+                  >
+                    <Typography sx={{ color: isDarkMode ? "#fff" : "#000" }}>
+                      <SiOpenai className="openAI" />
+                    </Typography>
+                    {item.type === "text" ? (
+                      <Typography
+                        sx={{
+                          color: isDarkMode ? "rgba(236, 236, 241, 1)" : "",
+                          textAlign: "justify",
+                        }}
+                      >
+                        {item.result}
+                      </Typography>
+                    ) : (
+                      <img
+                        style={{
+                          width: "200px",
+                        }}
+                        src={item.result}
+                        alt="Image"
+                      />
+                    )}
+                  </Box>
+                ) : null}
+              </Box>
+            ))
+          ) : (
+            <Box
+              sx={{
+                padding: isNonDesktopScreens ? "50px 75px" : "100px 300px",
+                display: "grid",
+                gridTemplateColumns: isNonDesktopScreens
+                  ? "1fr"
+                  : "1fr 1fr 1fr",
+                gap: "2rem",
+              }}
+            >
+              <Box
+                sx={{
+                  color: isDarkMode ? "#fff" : "#000",
+                  textAlign: "center",
+                }}
+              >
+                <LightModeIcon
+                  sx={{
+                    fontSize: "3rem",
+                  }}
+                />
+                <Typography component={'span'} variant={'body2'}
+                  sx={{
+                    fontSize: "x-large",
+                    margin: "0px 0px 0px 5px",
+                  }}
+                >
+                  Examples
+                </Typography>
+
+                <Box
+                  sx={{
+                    boxShadow:
+                      "0 0 transparent, 0 0 transparent, 0 0 10px rgba(0,0,0, .1)",
+                    borderRadius: "5px",
+                    backgroundColor: isDarkMode
+                      ? "rgba(68, 70, 84, 1)"
+                      : "rgba(247, 247, 248, 1)",
+                    color: isDarkMode ? "#fff" : "#000",
+                    textAlign: "center",
+                  }}
+                >
+                  <Typography 
+                    sx={{
+                      fontSize: "medium",
+                      margin: "15px 15px 15px 15px",
+                    }}
+                  >
+                    Explain quantum computing in simple terms
+                  </Typography>
+                </Box>
+
+                <Box
+                  sx={{
+                    boxShadow:
+                      "0 0 transparent, 0 0 transparent, 0 0 10px rgba(0,0,0, .1)",
+                    borderRadius: "5px",
+                    backgroundColor: isDarkMode
+                      ? "rgba(68, 70, 84, 1)"
+                      : "rgba(247, 247, 248, 1)",
+                    color: isDarkMode ? "#fff" : "#000",
+                    textAlign: "center",
+                  }}
+                >
+                   <Typography sx={{
+                    fontSize: "medium",
+                    margin: "15px 15px 15px 15px",
+                  }}>
+                    Got any creative ideas for a 10 year old’s birthday?
+                  </Typography>
+                </Box>
+
+                <Box
+                  sx={{
+                    boxShadow:
+                      "0 0 transparent, 0 0 transparent, 0 0 10px rgba(0,0,0, .1)",
+                    borderRadius: "5px",
+                    backgroundColor: isDarkMode
+                      ? "rgba(68, 70, 84, 1)"
+                      : "rgba(247, 247, 248, 1)",
+                    color: isDarkMode ? "#fff" : "#000",
+                    textAlign: "center",
+                  }}
+                >
+                   <Box
+                  sx={{
+                    boxShadow:
+                      "0 0 transparent, 0 0 transparent, 0 0 10px rgba(0,0,0, .1)",
+                    borderRadius: "5px",
+                    backgroundColor: isDarkMode
+                      ? "rgba(68, 70, 84, 1)"
+                      : "rgba(247, 247, 248, 1)",
+                    color: isDarkMode ? "#fff" : "#000",
+                    textAlign: "center",
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      fontSize: "medium",
+                      margin: "15px 15px 15px 15px",
+                    }}
+                  >
+                    Generate a code in Java that prints numbers from 1 to 1000
+                  </Typography>
+                </Box>
+                </Box>
+              </Box>
+
+
+
+              <Box
+                sx={{
+                  color: isDarkMode ? "#fff" : "#000",
+                  textAlign: "center",
+                }}
+              >
+                <BoltIcon
+                  sx={{
+                    fontSize: "3rem",
+                  }}
+                />
+                <Typography component={'span'}
+                  sx={{
+                    fontSize: "x-large",
+                    margin: "0px 0px 0px 5px",
+                  }}
+                >
+                  Capabilities
+
+                  <Box
+                  sx={{
+                    boxShadow:
+                      "0 0 transparent, 0 0 transparent, 0 0 10px rgba(0,0,0, .1)",
+                    borderRadius: "5px",
+                    backgroundColor: isDarkMode
+                      ? "rgba(68, 70, 84, 1)"
+                      : "rgba(247, 247, 248, 1)",
+                    color: isDarkMode ? "#fff" : "#000",
+                    textAlign: "center",
+                  }}
+                >
+                  <Typography 
+                    sx={{
+                      fontSize: "medium",
+                      margin: "15px 15px 15px 15px",
+                    }}
+                  >
+                    Can provide same search results as Google
+                  </Typography>
+                </Box>
+
+                <Box
+                  sx={{
+                    boxShadow:
+                      "0 0 transparent, 0 0 transparent, 0 0 10px rgba(0,0,0, .1)",
+                    borderRadius: "5px",
+                    backgroundColor: isDarkMode
+                      ? "rgba(68, 70, 84, 1)"
+                      : "rgba(247, 247, 248, 1)",
+                    color: isDarkMode ? "#fff" : "#000",
+                    textAlign: "center",
+                  }}
+                >
+                   <Typography sx={{
+                    fontSize: "medium",
+                    margin: "15px 15px 15px 15px",
+                  }}>
+                    Can provide images same as Dall-E
+                  </Typography>
+                </Box>
+
+                <Box
+                  sx={{
+                    boxShadow:
+                      "0 0 transparent, 0 0 transparent, 0 0 10px rgba(0,0,0, .1)",
+                    borderRadius: "5px",
+                    backgroundColor: isDarkMode
+                      ? "rgba(68, 70, 84, 1)"
+                      : "rgba(247, 247, 248, 1)",
+                    color: isDarkMode ? "#fff" : "#000",
+                    textAlign: "center",
+                  }}
+                >
+                   <Box
+                  sx={{
+                    boxShadow:
+                      "0 0 transparent, 0 0 transparent, 0 0 10px rgba(0,0,0, .1)",
+                    borderRadius: "5px",
+                    backgroundColor: isDarkMode
+                      ? "rgba(68, 70, 84, 1)"
+                      : "rgba(247, 247, 248, 1)",
+                    color: isDarkMode ? "#fff" : "#000",
+                    textAlign: "center",
+                  }}
+                >
+                  <Typography component={'span'}
+                    sx={{
+                      fontSize: "medium",
+                      margin: "15px 15px 15px 15px",
+                    }}
+                  >
+                    Can converse like a human being
+                  </Typography>
+                </Box>
+                </Box>
+
+                </Typography>
+              </Box>
+
+              <Box
+                sx={{
+                  color: isDarkMode ? "#fff" : "#000",
+                  textAlign: "center",
+                }}
+              >
+                <WarningAmberIcon
+                  sx={{
+                    fontSize: "3rem",
+                  }}
+                />
+                <Typography component={'span'}
+                  sx={{
+                    fontSize: "x-large",
+                    margin: "0px 0px 0px 5px",
+                  }}
+                >
+                  Limitations
+
+                  <Box
+                  sx={{
+                    boxShadow:
+                      "0 0 transparent, 0 0 transparent, 0 0 10px rgba(0,0,0, .1)",
+                    borderRadius: "5px",
+                    backgroundColor: isDarkMode
+                      ? "rgba(68, 70, 84, 1)"
+                      : "rgba(247, 247, 248, 1)",
+                    color: isDarkMode ? "#fff" : "#000",
+                    textAlign: "center",
+                  }}
+                >
+                  <Typography 
+                    sx={{
+                      fontSize: "medium",
+                      margin: "15px 15px 15px 15px",
+                    }}
+                  >
+                    May occasionally generate incorrect information
+                  </Typography>
+                </Box>
+
+                <Box
+                  sx={{
+                    boxShadow:
+                      "0 0 transparent, 0 0 transparent, 0 0 10px rgba(0,0,0, .1)",
+                    borderRadius: "5px",
+                    backgroundColor: isDarkMode
+                      ? "rgba(68, 70, 84, 1)"
+                      : "rgba(247, 247, 248, 1)",
+                    color: isDarkMode ? "#fff" : "#000",
+                    textAlign: "center",
+                  }}
+                >
+                   <Typography sx={{
+                    fontSize: "medium",
+                    margin: "15px 15px 15px 15px",
+                  }}>
+                    May occasionally produce harmful instructions or biased content
+                  </Typography>
+                </Box>
+
+                <Box
+                  sx={{
+                    boxShadow:
+                      "0 0 transparent, 0 0 transparent, 0 0 10px rgba(0,0,0, .1)",
+                    borderRadius: "5px",
+                    backgroundColor: isDarkMode
+                      ? "rgba(68, 70, 84, 1)"
+                      : "rgba(247, 247, 248, 1)",
+                    color: isDarkMode ? "#fff" : "#000",
+                    textAlign: "center",
+                  }}
+                >
+                   <Box
+                  sx={{
+                    boxShadow:
+                      "0 0 transparent, 0 0 transparent, 0 0 10px rgba(0,0,0, .1)",
+                    borderRadius: "5px",
+                    backgroundColor: isDarkMode
+                      ? "rgba(68, 70, 84, 1)"
+                      : "rgba(247, 247, 248, 1)",
+                    color: isDarkMode ? "#fff" : "#000",
+                    textAlign: "center",
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      fontSize: "medium",
+                      margin: "15px 15px 15px 15px",
+                    }}
+                  >
+                    Limited knowledge of world and events after 2021
+                  </Typography>
+                </Box>
+                </Box>
+                </Typography>
+              </Box>
+            </Box>
+          )}
         </Box>
         <Paper
           component={"form"}
