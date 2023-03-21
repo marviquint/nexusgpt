@@ -1,4 +1,111 @@
 .openAI{
     font-size: xx-large;
-
 }
+
+    /*Media Queries (Extra Large Devices)*/
+    @media screen and (max-width: 1920px){
+        .userQuery{
+            display: grid;
+            padding: 20px 100px;
+            align-items: center;
+        }
+
+        .textResultBox{
+            display: grid;
+            padding: 20px 100px;
+            align-items: center;
+        }
+
+
+        .homeBox{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            align-items: center;
+            padding: 250px 500px 0px 500px;
+            gap: 5rem;
+        }
+
+        .capabilitiesBox{
+            padding-bottom: 10px;
+        }
+    }
+
+     /*Media Queries (Large Devices)*/
+     @media screen and (max-width: 1660px){
+        .homeBox{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            align-items: center;
+            padding: 200px 170px 0px 170px;
+            gap: 5rem;
+        }
+    }
+
+    /*Media Queries (Medium Devices)*/
+@media screen and (max-width: 1024px){
+    .userQuery{
+        display: grid;
+        padding: 20px 100px;
+        align-items: center;
+    }
+
+    .textResultBox{
+        display: grid;
+        padding: 20px 100px;
+        align-items: center;
+    }
+
+    .homeBox{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        align-items: center;
+        padding: 80px 150px 0px 150px;
+        gap: 1rem;
+    }
+}
+
+/*Media Queries (Small Devices)*/
+@media screen and (max-width: 600px){
+    .userQuery{
+        display: grid;
+        padding: 20px 20px;
+        align-items: center;
+    }
+
+    .textResultBox{
+        display: grid;
+        padding: 20px 20px;
+        align-items: center;
+    }
+    
+    .homeBox{
+        display: grid;
+        grid-template-columns: 1fr;
+        align-items: center;
+        padding: 80px 60px 0px 60px;
+        gap: 5px;
+    }
+}
+
+/*Media Queries (Extra Small Devices)*/
+@media screen and (max-width: 300px){
+    .userQuery{
+        display: grid;
+        padding: 20px 20px;
+        align-items: center;
+    }
+
+    .textResultBox{
+        display: grid;
+        padding: 20px 20px;
+        align-items: center;
+    }
+
+    .homeBox{
+        display: grid;
+        grid-template-columns: 1fr;
+        align-items: center;
+        padding: 80px 40px 0px 40px;
+        gap: 5px;
+    }
+ }

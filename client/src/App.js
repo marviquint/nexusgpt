@@ -1,14 +1,6 @@
 import "./App.css";
 import Sidebar from "./Sidebar";
-import {
-  Stack,
-  Box,
-  Grid,
-  Paper,
-  IconButton,
-  Typography,
-  useMediaQuery,
-} from "@mui/material";
+import { Stack, Box, Paper, IconButton, Typography } from "@mui/material";
 import { Send } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -89,8 +81,6 @@ function App() {
 
   console.log(currentChatType);
 
-  const isNonDesktopScreens = useMediaQuery("(max-width: 800px)");
-
   return (
     <Stack direction={"row"} height="100vh">
       <Box>
@@ -121,11 +111,7 @@ function App() {
           {messages && messages.length > 0 ? (
             messages.map((item) => (
               <Box>
-                <Box
-                  sx={{
-                    padding: isNonDesktopScreens ? "2px 50px" : "20px 120px",
-                  }}
-                >
+                <Box className="userQuery">
                   <AccountCircleIcon
                     sx={{
                       fontSize: "xxx-large",
@@ -145,9 +131,8 @@ function App() {
 
                 {item.result !== "" ? (
                   <Box
-                    className="resultBox"
+                    className="textResultBox"
                     sx={{
-                      padding: isNonDesktopScreens ? "5px 50px" : "20px 120px",
                       backgroundColor: isDarkMode
                         ? "rgba(68, 70, 84, 1)"
                         : "rgba(247, 247, 248, 1)",
@@ -159,6 +144,7 @@ function App() {
                     </Typography>
                     {item.type === "text" ? (
                       <Typography
+                        className="textResult"
                         sx={{
                           color: isDarkMode ? "rgba(236, 236, 241, 1)" : "",
                           textAlign: "justify",
@@ -168,6 +154,7 @@ function App() {
                       </Typography>
                     ) : (
                       <img
+                        className="imageResult"
                         style={{
                           width: "200px",
                         }}
@@ -180,17 +167,9 @@ function App() {
               </Box>
             ))
           ) : (
-            <Box
-              sx={{
-                padding: isNonDesktopScreens ? "50px 75px" : "100px 300px",
-                display: "grid",
-                gridTemplateColumns: isNonDesktopScreens
-                  ? "1fr"
-                  : "1fr 1fr 1fr",
-                gap: "2rem",
-              }}
-            >
+            <Box className="homeBox">
               <Box
+                className="examplesBox"
                 sx={{
                   color: isDarkMode ? "#fff" : "#000",
                   textAlign: "center",
@@ -201,7 +180,7 @@ function App() {
                     fontSize: "3rem",
                   }}
                 />
-                <Typography component={'span'} variant={'body2'}
+                <Typography
                   sx={{
                     fontSize: "x-large",
                     margin: "0px 0px 0px 5px",
@@ -211,6 +190,7 @@ function App() {
                 </Typography>
 
                 <Box
+                  className="example1Box"
                   sx={{
                     boxShadow:
                       "0 0 transparent, 0 0 transparent, 0 0 10px rgba(0,0,0, .1)",
@@ -222,7 +202,7 @@ function App() {
                     textAlign: "center",
                   }}
                 >
-                  <Typography 
+                  <Typography
                     sx={{
                       fontSize: "medium",
                       margin: "15px 15px 15px 15px",
@@ -233,38 +213,7 @@ function App() {
                 </Box>
 
                 <Box
-                  sx={{
-                    boxShadow:
-                      "0 0 transparent, 0 0 transparent, 0 0 10px rgba(0,0,0, .1)",
-                    borderRadius: "5px",
-                    backgroundColor: isDarkMode
-                      ? "rgba(68, 70, 84, 1)"
-                      : "rgba(247, 247, 248, 1)",
-                    color: isDarkMode ? "#fff" : "#000",
-                    textAlign: "center",
-                  }}
-                >
-                   <Typography sx={{
-                    fontSize: "medium",
-                    margin: "15px 15px 15px 15px",
-                  }}>
-                    Got any creative ideas for a 10 year old’s birthday?
-                  </Typography>
-                </Box>
-
-                <Box
-                  sx={{
-                    boxShadow:
-                      "0 0 transparent, 0 0 transparent, 0 0 10px rgba(0,0,0, .1)",
-                    borderRadius: "5px",
-                    backgroundColor: isDarkMode
-                      ? "rgba(68, 70, 84, 1)"
-                      : "rgba(247, 247, 248, 1)",
-                    color: isDarkMode ? "#fff" : "#000",
-                    textAlign: "center",
-                  }}
-                >
-                   <Box
+                  className="example1Box"
                   sx={{
                     boxShadow:
                       "0 0 transparent, 0 0 transparent, 0 0 10px rgba(0,0,0, .1)",
@@ -282,15 +231,49 @@ function App() {
                       margin: "15px 15px 15px 15px",
                     }}
                   >
-                    Generate a code in Java that prints numbers from 1 to 1000
+                    Got any creative ideas for a 10 year old’s birthday?
                   </Typography>
                 </Box>
+
+                <Box
+                  className="example1Box"
+                  sx={{
+                    boxShadow:
+                      "0 0 transparent, 0 0 transparent, 0 0 10px rgba(0,0,0, .1)",
+                    borderRadius: "5px",
+                    backgroundColor: isDarkMode
+                      ? "rgba(68, 70, 84, 1)"
+                      : "rgba(247, 247, 248, 1)",
+                    color: isDarkMode ? "#fff" : "#000",
+                    textAlign: "center",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      boxShadow:
+                        "0 0 transparent, 0 0 transparent, 0 0 10px rgba(0,0,0, .1)",
+                      borderRadius: "5px",
+                      backgroundColor: isDarkMode
+                        ? "rgba(68, 70, 84, 1)"
+                        : "rgba(247, 247, 248, 1)",
+                      color: isDarkMode ? "#fff" : "#000",
+                      textAlign: "center",
+                    }}
+                  >
+                    <Typography
+                      sx={{
+                        fontSize: "medium",
+                        margin: "15px 15px 15px 15px",
+                      }}
+                    >
+                      Generate a code in Java that prints numbers from 1 to 1000
+                    </Typography>
+                  </Box>
                 </Box>
               </Box>
 
-
-
               <Box
+                className="capabilitiesBox"
                 sx={{
                   color: isDarkMode ? "#fff" : "#000",
                   textAlign: "center",
@@ -301,95 +284,85 @@ function App() {
                     fontSize: "3rem",
                   }}
                 />
-                <Typography component={'span'}
+                <Typography
                   sx={{
                     fontSize: "x-large",
                     margin: "0px 0px 0px 5px",
                   }}
                 >
                   Capabilities
-
                   <Box
-                  sx={{
-                    boxShadow:
-                      "0 0 transparent, 0 0 transparent, 0 0 10px rgba(0,0,0, .1)",
-                    borderRadius: "5px",
-                    backgroundColor: isDarkMode
-                      ? "rgba(68, 70, 84, 1)"
-                      : "rgba(247, 247, 248, 1)",
-                    color: isDarkMode ? "#fff" : "#000",
-                    textAlign: "center",
-                  }}
-                >
-                  <Typography 
+                    className="capabilities1Box"
                     sx={{
-                      fontSize: "medium",
-                      margin: "15px 15px 15px 15px",
+                      boxShadow:
+                        "0 0 transparent, 0 0 transparent, 0 0 10px rgba(0,0,0, .1)",
+                      borderRadius: "5px",
+                      backgroundColor: isDarkMode
+                        ? "rgba(68, 70, 84, 1)"
+                        : "rgba(247, 247, 248, 1)",
+                      color: isDarkMode ? "#fff" : "#000",
+                      textAlign: "center",
                     }}
                   >
-                    Can provide same search results as Google
-                  </Typography>
-                </Box>
-
-                <Box
-                  sx={{
-                    boxShadow:
-                      "0 0 transparent, 0 0 transparent, 0 0 10px rgba(0,0,0, .1)",
-                    borderRadius: "5px",
-                    backgroundColor: isDarkMode
-                      ? "rgba(68, 70, 84, 1)"
-                      : "rgba(247, 247, 248, 1)",
-                    color: isDarkMode ? "#fff" : "#000",
-                    textAlign: "center",
-                  }}
-                >
-                   <Typography sx={{
-                    fontSize: "medium",
-                    margin: "15px 15px 15px 15px",
-                  }}>
-                    Can provide images same as Dall-E
-                  </Typography>
-                </Box>
-
-                <Box
-                  sx={{
-                    boxShadow:
-                      "0 0 transparent, 0 0 transparent, 0 0 10px rgba(0,0,0, .1)",
-                    borderRadius: "5px",
-                    backgroundColor: isDarkMode
-                      ? "rgba(68, 70, 84, 1)"
-                      : "rgba(247, 247, 248, 1)",
-                    color: isDarkMode ? "#fff" : "#000",
-                    textAlign: "center",
-                  }}
-                >
-                   <Box
-                  sx={{
-                    boxShadow:
-                      "0 0 transparent, 0 0 transparent, 0 0 10px rgba(0,0,0, .1)",
-                    borderRadius: "5px",
-                    backgroundColor: isDarkMode
-                      ? "rgba(68, 70, 84, 1)"
-                      : "rgba(247, 247, 248, 1)",
-                    color: isDarkMode ? "#fff" : "#000",
-                    textAlign: "center",
-                  }}
-                >
-                  <Typography component={'span'}
+                    <Typography
+                      sx={{
+                        fontSize: "medium",
+                        margin: "15px 15px 15px 15px",
+                      }}
+                    >
+                      Can provide same search results as Google
+                    </Typography>
+                  </Box>
+                  <Box
+                    className="capabilities1Box"
                     sx={{
-                      fontSize: "medium",
-                      margin: "15px 15px 15px 15px",
+                      boxShadow:
+                        "0 0 transparent, 0 0 transparent, 0 0 10px rgba(0,0,0, .1)",
+                      borderRadius: "5px",
+                      backgroundColor: isDarkMode
+                        ? "rgba(68, 70, 84, 1)"
+                        : "rgba(247, 247, 248, 1)",
+                      color: isDarkMode ? "#fff" : "#000",
+                      textAlign: "center",
                     }}
                   >
-                    Can converse like a human being
-                  </Typography>
-                </Box>
-                </Box>
-
+                    <Typography
+                      sx={{
+                        fontSize: "medium",
+                        margin: "15px 15px 15px 15px",
+                      }}
+                    >
+                      Can provide images same as Dall-E
+                    </Typography>
+                  </Box>
+                  <Box
+                    className="capabilities1Box"
+                    sx={{
+                      boxShadow:
+                        "0 0 transparent, 0 0 transparent, 0 0 10px rgba(0,0,0, .1)",
+                      borderRadius: "5px",
+                      backgroundColor: isDarkMode
+                        ? "rgba(68, 70, 84, 1)"
+                        : "rgba(247, 247, 248, 1)",
+                      color: isDarkMode ? "#fff" : "#000",
+                      textAlign: "center",
+                    }}
+                  >
+                    <Typography
+                      component={"span"}
+                      sx={{
+                        fontSize: "medium",
+                        margin: "15px 15px 15px 15px",
+                      }}
+                    >
+                      Can converse like a human being
+                    </Typography>
+                  </Box>
                 </Typography>
               </Box>
 
               <Box
+                className="limitationsBox"
                 sx={{
                   color: isDarkMode ? "#fff" : "#000",
                   textAlign: "center",
@@ -400,90 +373,93 @@ function App() {
                     fontSize: "3rem",
                   }}
                 />
-                <Typography component={'span'}
+                <Typography
                   sx={{
                     fontSize: "x-large",
                     margin: "0px 0px 0px 5px",
                   }}
                 >
                   Limitations
-
                   <Box
-                  sx={{
-                    boxShadow:
-                      "0 0 transparent, 0 0 transparent, 0 0 10px rgba(0,0,0, .1)",
-                    borderRadius: "5px",
-                    backgroundColor: isDarkMode
-                      ? "rgba(68, 70, 84, 1)"
-                      : "rgba(247, 247, 248, 1)",
-                    color: isDarkMode ? "#fff" : "#000",
-                    textAlign: "center",
-                  }}
-                >
-                  <Typography 
+                    className="limitations1Box"
                     sx={{
-                      fontSize: "medium",
-                      margin: "15px 15px 15px 15px",
+                      boxShadow:
+                        "0 0 transparent, 0 0 transparent, 0 0 10px rgba(0,0,0, .1)",
+                      borderRadius: "5px",
+                      backgroundColor: isDarkMode
+                        ? "rgba(68, 70, 84, 1)"
+                        : "rgba(247, 247, 248, 1)",
+                      color: isDarkMode ? "#fff" : "#000",
+                      textAlign: "center",
                     }}
                   >
-                    May occasionally generate incorrect information
-                  </Typography>
-                </Box>
-
-                <Box
-                  sx={{
-                    boxShadow:
-                      "0 0 transparent, 0 0 transparent, 0 0 10px rgba(0,0,0, .1)",
-                    borderRadius: "5px",
-                    backgroundColor: isDarkMode
-                      ? "rgba(68, 70, 84, 1)"
-                      : "rgba(247, 247, 248, 1)",
-                    color: isDarkMode ? "#fff" : "#000",
-                    textAlign: "center",
-                  }}
-                >
-                   <Typography sx={{
-                    fontSize: "medium",
-                    margin: "15px 15px 15px 15px",
-                  }}>
-                    May occasionally produce harmful instructions or biased content
-                  </Typography>
-                </Box>
-
-                <Box
-                  sx={{
-                    boxShadow:
-                      "0 0 transparent, 0 0 transparent, 0 0 10px rgba(0,0,0, .1)",
-                    borderRadius: "5px",
-                    backgroundColor: isDarkMode
-                      ? "rgba(68, 70, 84, 1)"
-                      : "rgba(247, 247, 248, 1)",
-                    color: isDarkMode ? "#fff" : "#000",
-                    textAlign: "center",
-                  }}
-                >
-                   <Box
-                  sx={{
-                    boxShadow:
-                      "0 0 transparent, 0 0 transparent, 0 0 10px rgba(0,0,0, .1)",
-                    borderRadius: "5px",
-                    backgroundColor: isDarkMode
-                      ? "rgba(68, 70, 84, 1)"
-                      : "rgba(247, 247, 248, 1)",
-                    color: isDarkMode ? "#fff" : "#000",
-                    textAlign: "center",
-                  }}
-                >
-                  <Typography
+                    <Typography
+                      sx={{
+                        fontSize: "medium",
+                        margin: "15px 15px 15px 15px",
+                      }}
+                    >
+                      May occasionally generate incorrect information
+                    </Typography>
+                  </Box>
+                  <Box
+                    className="limitations1Box"
                     sx={{
-                      fontSize: "medium",
-                      margin: "15px 15px 15px 15px",
+                      boxShadow:
+                        "0 0 transparent, 0 0 transparent, 0 0 10px rgba(0,0,0, .1)",
+                      borderRadius: "5px",
+                      backgroundColor: isDarkMode
+                        ? "rgba(68, 70, 84, 1)"
+                        : "rgba(247, 247, 248, 1)",
+                      color: isDarkMode ? "#fff" : "#000",
+                      textAlign: "center",
                     }}
                   >
-                    Limited knowledge of world and events after 2021
-                  </Typography>
-                </Box>
-                </Box>
+                    <Typography
+                      sx={{
+                        fontSize: "medium",
+                        margin: "15px 15px 15px 15px",
+                      }}
+                    >
+                      May occasionally produce harmful instructions or biased
+                      content
+                    </Typography>
+                  </Box>
+                  <Box
+                    className="limitations1Box"
+                    sx={{
+                      boxShadow:
+                        "0 0 transparent, 0 0 transparent, 0 0 10px rgba(0,0,0, .1)",
+                      borderRadius: "5px",
+                      backgroundColor: isDarkMode
+                        ? "rgba(68, 70, 84, 1)"
+                        : "rgba(247, 247, 248, 1)",
+                      color: isDarkMode ? "#fff" : "#000",
+                      textAlign: "center",
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        boxShadow:
+                          "0 0 transparent, 0 0 transparent, 0 0 10px rgba(0,0,0, .1)",
+                        borderRadius: "5px",
+                        backgroundColor: isDarkMode
+                          ? "rgba(68, 70, 84, 1)"
+                          : "rgba(247, 247, 248, 1)",
+                        color: isDarkMode ? "#fff" : "#000",
+                        textAlign: "center",
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          fontSize: "medium",
+                          margin: "15px 15px 15px 15px",
+                        }}
+                      >
+                        Limited knowledge of world and events after 2021
+                      </Typography>
+                    </Box>
+                  </Box>
                 </Typography>
               </Box>
             </Box>
@@ -493,7 +469,6 @@ function App() {
           component={"form"}
           sx={{
             borderRadius: "8px",
-            border: "1px solid #e3e3e3",
             position: "absolute",
             bottom: "20px",
             width: "50%",
@@ -505,6 +480,9 @@ function App() {
             boxShadow:
               "0 0 transparent, 0 0 transparent, 0 0 10px rgba(0,0,0, .1)",
             padding: "8px 12px",
+            backgroundColor: isDarkMode
+              ? "rgba(68, 70, 84, 1)"
+              : "rgba(247, 247, 248, 1)",
           }}
           onSubmit={handleSubmit}
         >
@@ -515,6 +493,10 @@ function App() {
               border: "none",
               outline: "none",
               fontSize: "16px",
+              backgroundColor: isDarkMode
+                ? "rgba(68, 70, 84, 1)"
+                : "rgba(247, 247, 248, 1)",
+              color: isDarkMode ? "#fff" : "#000",
             }}
             value={inputValue}
             onChange={handleChatInput}
@@ -524,7 +506,7 @@ function App() {
             type="submit"
             sx={{
               p: "10px",
-              backgroundColor: "rgba(0,0,0,.04)",
+              backgroundColor: isDarkMode ? "#fff" : "rgba(0,0,0,.04)",
               borderLeft: "1px solid #f2f2f2",
               color: "#000",
             }}
