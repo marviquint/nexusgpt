@@ -509,6 +509,9 @@ function App() {
               backgroundColor: isDarkMode ? "#fff" : "rgba(0,0,0,.04)",
               borderLeft: "1px solid #f2f2f2",
               color: "#000",
+              "&:hover": {
+                backgroundColor: '#fff'
+              }
             }}
           >
             <Send />
